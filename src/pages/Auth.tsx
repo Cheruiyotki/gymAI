@@ -10,5 +10,6 @@ export default function  Auth() {
                 <AuthView pathname={pathname} />
             </div>
         </div>
+        
 );
 }
