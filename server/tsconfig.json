@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    /* Target & Environment Options */
+    "target": "ES2022",
+    "module": "NodeNext",                  // Correctly supports native ES Module imports
+    "lib": ["ES2022"],
+    "moduleResolution": "NodeNext",          // Pairs with module for accurate package routing
+
+    /* Execution Directories */
+    "rootDir": "./src",                    // Strictly compiles files inside the src folder
+    "outDir": "./dist",                    // Emits clean, executable production JS here
+
+    /* Interoperability & System Optimization */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,                  // Speeds up compile speeds by skipping library definitions
+
+    /* Strict Quality Defenses */
+    "strict": true,                        // Enforces rigorous type safety checks
+    "noImplicitAny": false                 // Allows loose typing on inputs if explicitly chosen
+  },
+  "include": ["src/**/*"],                 // Only watch code inside your source folder
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+}
