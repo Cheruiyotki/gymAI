@@ -2,10 +2,10 @@ import { RedirectToSignIn, SignedIn } from "@neondatabase/neon-js/auth/react";
 import { useAuth } from "../context/AuthContext";
 import { Card } from "../componets/ui/Card";
 import { Select } from "../componets/ui/Select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Textarea } from "../componets/ui/Textarea";
 import { Button } from "../componets/ui/Button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import type { UserProfile } from "../types";
 
 
@@ -63,6 +63,9 @@ export default function  Onboarding() {
     preferredSplit: "upper_lower",
   });
 
+  const [isGenerating, setisGenerating] = useState(false);
+    const [error, setError] = useState("");
+
   function updateForm(field: string, value: string ) {
      setFormData((prev) => ({...prev, [field]: value }));
   }
@@ -83,7 +86,14 @@ export default function  Onboarding() {
       injuries: formData.injuries || undefined,
       preferredSplit: formData.preferredSplit as UserProfile["preferredSplit"],
     };
-    saveProfile(profile);
+   try {
+       await saveProfile(profile);
+           setisGenerating(true)
+   } catch (err) {
+           setError(err instanceof Error ? err.message : 'Failed to save profile')
+   }finally {
+       setisGenerating(false);
+   }
         
     }
 
@@ -95,7 +105,7 @@ export default function  Onboarding() {
             {/* Progress Indicator */}
 
             {/* Step 1: Questionare */}
-            <Card variant="bordered">
+            {!isGenerating ? (<Card variant="bordered">
               <h1 className="text-2xl font-bold mb-2">Tell Us About YourSelf!</h1>
               <p className="text-[var(--color-muted)] mb-6">Help us create the perfect plan for you.</p>
               <form action=" "
@@ -161,7 +171,13 @@ export default function  Onboarding() {
                     </Button>
                 </div>
               </form>
-            </Card>
+            </Card>) : (
+              <Card variant="bordered" className="text-center py-16">
+                <Loader2 className="w-12 h-12 text-[var(--color-accent)] mx-auto mb-6 animate-spin"/>
+                <h1 className="text-2xl font-bold mb-2">Creating your Plan</h1>
+                <p className="text-[var(--color-muted)]">Our AI is building your personalized training program...</p>
+              </Card>
+            )}
 
              {/* Step 2: Generating */}
         </div>

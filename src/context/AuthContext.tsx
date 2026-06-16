@@ -17,6 +17,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export default function AuthProvider({children} : {children: ReactNode}) {
     const [neonUser, setNeonUser] = useState<any>(null);
     const [isLoading, setisLoading] = useState(true);
+    
 
     useEffect(() =>  {
         async function  loadUSer() {
@@ -43,8 +44,11 @@ export default function AuthProvider({children} : {children: ReactNode}) {
         if (!neonUser) {
             throw new Error ("User must be authenticated to save profile");
         }
-
-        await api.saveProfile(neonUser.id, profileData);
+ 
+    await api.saveProfile(neonUser.id, profileData);
+       
+ 
+       
     }
 
 
