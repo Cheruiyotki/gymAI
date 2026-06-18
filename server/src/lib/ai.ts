@@ -16,5 +16,12 @@ export async function generateTrainingPlan(profile:  UserProfile | Record<string
     equipment: profile.equipment || "full_gym",
     injuries: profile.injuries || null,
     preferred_split: profile.preferred_split || "upper_lower",
+    };
+
+    const apiKEy = process.env.OPEN_ROUTER_KEY;
+
+    if (!apiKEy) {
+        throw new Error("OPEN_ROUTER_KEY is not set in environment variables
+            ")
     }
 }
