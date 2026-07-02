@@ -35,6 +35,13 @@ planRouter.post("/generate", async (req: Request, res: Response) => {
     const nextVersion = latestPlan ? latestPlan.version + 1 : 1;
     let planJson;
 
+    try {
+        planJson
+    } catch (error) {
+        console.error("Error generating training plan:", error);
+        return res.status(500).json({error: "Failed to generate training plan", details: error instanceof Error ? error.message :  "Unknown error"});
+    }
+
     const planText = JSON.stringify(planJson, null, 2);
 
     const newPlan = await prisma.training_plans.create({
