@@ -39,5 +39,30 @@ export async function generateTrainingPlan(profile:  UserProfile | Record<string
 }
 
 function buildPrompt(profile: UserProfile): string {
-    
+   const goalMap: Record<string, string> = {
+    bulk: "build muscle and gain size",
+    cut: "lose fat and maintain muscle",
+    recomp: "simultaneously lose fat and build muscle",
+    strength: "build maximum strength",
+    endurance: "improve cardiovascular endurance and stamina",
+  };
+
+  const experienceMap: Record<string, string> = {
+    beginner: "beginner (0-1 years of training experience)",
+    intermediate: "intermediate (1-3 years of training experience)",
+    advanced: "advanced (3+ years of training experience)",
+  };
+
+  const equipmentMap: Record<string, string> = {
+    full_gym: "full gym access with all equipment",
+    home: "home gym with limited equipment",
+    dumbbells: "only dumbbells available",
+  };
+
+  const splitMap: Record<string, string> = {
+    full_body: "full body workouts",
+    upper_lower: "upper/lower split",
+    ppl: "push/pull/legs split",
+    custom: "best split for their goals",
+  };
 }
