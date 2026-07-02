@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import dotenv from "dotenv"
 import { TrainingPlan, UserProfile } from "../../types";
+import { build } from "vite";
 
 dotenv.config();
 
@@ -32,4 +33,11 @@ export async function generateTrainingPlan(profile:  UserProfile | Record<string
             "X-Title": "GymAI Plan Generator",
         },
     });
+
+    //  Build the prompt for the AI model
+    const prompt = buildPrompt(normalizedProfile);
+}
+
+function buildPrompt(profile: UserProfile): string {
+    
 }
