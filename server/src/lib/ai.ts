@@ -18,10 +18,18 @@ export async function generateTrainingPlan(profile:  UserProfile | Record<string
     preferred_split: profile.preferred_split || "upper_lower",
     };
 
-    const apiKEy = process.env.OPEN_ROUTER_KEY;
+    const apiKey = process.env.OPEN_ROUTER_KEY;
 
-    if (!apiKEy) {
-        throw new Error("OPEN_ROUTER_KEY is not set in environment variables
-            ")
+    if (!apiKey) {
+        throw new Error("OPEN_ROUTER_KEY is not set in environment variables");
     }
+
+    const openai = new OpenAI({
+        apiKey,
+        baseURL: "https://openrouter.ai/api/v1",
+        defaultHeaders: {
+            "HTTP-Referer": process.env.BASE_URL || "http://localhost:3001",
+            "X-Title": "GymAI Plan Generator",
+        },
+    });
 }
