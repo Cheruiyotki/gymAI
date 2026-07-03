@@ -24,7 +24,10 @@ async function  get( ) {
 export const api  ={
     saveProfile: (userId: string, profile: Omit<UserProfile, "userId" | "updatedAt">) => {
      return   post("/profile", { userId, ...profile});
-    }
+    },
+    generatePlan: (userId: string) => {
+     return  post("/plan/generate", { userId });
+    },
 
    
 };
