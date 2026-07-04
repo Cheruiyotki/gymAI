@@ -93,3 +93,11 @@ planRouter.get("/current", async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to fetch plan" });
   }
 });
+
+planRouter.get("/current", async (req: Request, res: Response) => {
+  try {
+
+  } catch (error) {
+
+  }
+});
