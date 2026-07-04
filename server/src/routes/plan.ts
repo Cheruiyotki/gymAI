@@ -96,7 +96,15 @@ planRouter.get("/current", async (req: Request, res: Response) => {
 
 planRouter.get("/current", async (req: Request, res: Response) => {
   try {
- 
+    const userId = req.query.userId as string;
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+    const plan = await prisma.training_plans.findFirst({
+      where: { user_id: userId },
+      orderBy: { created_at: "desc" },
+    });
   } catch (error) {
     console.error("Error fetching plan:", error);
     res.status(500).json({ error: "Failed to fetch plan" });
