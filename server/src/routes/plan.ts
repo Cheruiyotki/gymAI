@@ -105,6 +105,19 @@ planRouter.get("/current", async (req: Request, res: Response) => {
       where: { user_id: userId },
       orderBy: { created_at: "desc" },
     });
+
+    if (!plan) {
+      return res.status(404).json({ error: "No plan found" });
+    }
+
+    res.json({
+      id: plan.id,
+      userId: plan.user_id,
+      planJson: plan.plan_json,
+      planText: plan.plan_text,
+      version: plan.version,
+      createdAt: plan.created_at,
+    });
   } catch (error) {
     console.error("Error fetching plan:", error);
     res.status(500).json({ error: "Failed to fetch plan" });
