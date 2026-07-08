@@ -33,5 +33,7 @@ export const api  ={
      return  post("/plan/generate", { userId });
     },
 
-   getCurrentPlan: (userId:)
+   getCurrentPlan: (userId: string) => {
+    return get(`/plan/current?userId=${userId}`);
+   },
 };

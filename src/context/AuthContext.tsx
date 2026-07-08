@@ -39,7 +39,10 @@ export default function AuthProvider({children} : {children: ReactNode}) {
     loadUSer();
     }, [])
 
+ 
 
+    // refreshData memoize the function to avoid unnecessary re-renders
+     const 
     async function saveProfile(profileData: Omit<UserProfile, 'userId' | 'updatedAt'>) {
         if (!neonUser) {
             throw new Error ("User must be authenticated to save profile");
