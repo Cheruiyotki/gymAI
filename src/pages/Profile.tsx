@@ -6,7 +6,7 @@ import { Card } from "../componets/ui/Card";
 import { PlanDisplay } from "../componets/plan/planDisplay";
 
 export default function Profile() {
-    const { user, isLoading, plan } = useAuth();
+    const { user, isLoading, plan, generatePlan } = useAuth();
 
     // 1. Wait for Neon Auth to finish checking the session status
     if (isLoading) {
@@ -46,7 +46,7 @@ export default function Profile() {
                 </p>
             </div>
 
-            <Button  variant="secondary" className="gap-2"> 
+            <Button  variant="secondary" className="gap-2" onClick={async() => await generatePlan( )}> 
                <RefreshCcw className="w-4 h-4"/>
                Regenerate Plan
             </Button>
@@ -99,6 +99,13 @@ export default function Profile() {
            {/* Weekly Schedule */}
            <h2 className="font-semibold text-lg mb-4">Weekly Schedule</h2>
            <PlanDisplay weeklySchedule={plan.weeklySchedule}/>
+
+           <Card variant="bordered" className="mb-8">
+          <h2 className="font-semibold text-lg mb-2">Progression Strategy</h2>
+          <p className="text-[var(--color-muted)] text-sm leading-relaxed">
+            {plan.progression}
+          </p>
+        </Card>
          </div>
       </div>
     );
