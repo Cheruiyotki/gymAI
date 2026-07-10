@@ -92,7 +92,7 @@ export default function  Onboarding() {
        await saveProfile(profile);
            setisGenerating(true);
            await generatePlan();
-           navigate("profile")
+           navigate("/profile")
    } catch (err) {
            setError(err instanceof Error ? err.message : 'Failed to save profile')
    }finally {
