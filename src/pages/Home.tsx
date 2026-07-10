@@ -6,6 +6,7 @@ import {
   ArrowRight,
   Sparkles,
   Clock,
+  Dumbbell,
 } from "lucide-react";
  
 import { useAuth } from "../context/AuthContext";
@@ -120,6 +121,42 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <footer className="border-t border-[var(--color-border)] px-6 py-10">
+        <div className="max-w-6xl mx-auto flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <Link to="/" className="inline-flex items-center gap-2 font-semibold">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
+                <Dumbbell className="h-5 w-5" />
+              </span>
+              <span>GymAI</span>
+            </Link>
+            <p className="mt-3 max-w-md text-sm text-[var(--color-muted)]">
+              Personalized training plans built around your goals, equipment,
+              and weekly schedule.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-5 text-sm text-[var(--color-muted)]">
+            <Link
+              to="/onboarding"
+              className="transition-colors hover:text-[var(--color-foreground)]"
+            >
+              Get started
+            </Link>
+            <Link
+              to="/profile"
+              className="transition-colors hover:text-[var(--color-foreground)]"
+            >
+              Profile
+            </Link>
+            <span>
+              &copy; {new Date().getFullYear()} GymAI. Built for better
+              training.
+            </span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

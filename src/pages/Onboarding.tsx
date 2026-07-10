@@ -2,7 +2,7 @@ import { RedirectToSignIn, SignedIn } from "@neondatabase/neon-js/auth/react";
 import { useAuth } from "../context/AuthContext";
 import { Card } from "../componets/ui/Card";
 import { Select } from "../componets/ui/Select";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Textarea } from "../componets/ui/Textarea";
 import { Button } from "../componets/ui/Button";
 import { ArrowRight, Loader2 } from "lucide-react";
@@ -112,6 +112,11 @@ export default function  Onboarding() {
             {!isGenerating ? (<Card variant="bordered">
               <h1 className="text-2xl font-bold mb-2">Tell Us About YourSelf!</h1>
               <p className="text-[var(--color-muted)] mb-6">Help us create the perfect plan for you.</p>
+              {error && (
+                <p className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+                  {error}
+                </p>
+              )}
               <form action=" "
               onSubmit={handleQuestionnaire}
                className="space-y-5">
