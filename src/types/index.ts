@@ -23,6 +23,7 @@ export interface PlanOverview {
   frequency: string;
   split: string;
   notes: string;
+  
 }
 
 export interface Exercise {
