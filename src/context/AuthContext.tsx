@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import type { User, UserProfile } from "../types";
 import { authClient } from "../lib/auth";
 import { api } from "../lib/api";
@@ -17,6 +17,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export default function AuthProvider({children} : {children: ReactNode}) {
     const [neonUser, setNeonUser] = useState<any>(null);
     const [isLoading, setisLoading] = useState(true);
+    const isRefreshingRef = useRef(false);
     
 
     useEffect(() =>  {
@@ -42,7 +43,9 @@ export default function AuthProvider({children} : {children: ReactNode}) {
  
 
     // refreshData memoize the function to avoid unnecessary re-renders
-     const 
+     const refreshData = useCallback(async () => {
+        if (!neonUser || isRefreshingRef.current) return;
+     })
     async function saveProfile(profileData: Omit<UserProfile, 'userId' | 'updatedAt'>) {
         if (!neonUser) {
             throw new Error ("User must be authenticated to save profile");
